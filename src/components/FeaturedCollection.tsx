@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { X, ArrowRight, Check, ShoppingBag, ChevronRight } from "lucide-react";
+import { X, ArrowRight } from "lucide-react";
 
 // Import our original campaign/product images
 import campaign1 from "../assets/images/sadcream_brz_night_1784087879953.jpg";
@@ -11,11 +11,8 @@ import campaign4 from "../assets/images/sadcream_ribcage_back_1784087939886.jpg"
 interface Product {
   id: string;
   name: string;
-  price: string;
-  mntPrice: string;
   primaryImage: string;
   secondaryImage: string | null;
-  sizes: string[];
   description: string;
   specs: string[];
 }
@@ -24,66 +21,46 @@ const PRODUCTS: Product[] = [
   {
     id: "OBJECT 01",
     name: "SADCREAM LEOPARD ZIP-UP HOODIE (BACK EMBROIDERY)",
-    price: "Price Pending",
-    mntPrice: "₮ TBD",
     primaryImage: campaign4,
     secondaryImage: campaign3,
-    sizes: ["PENDING RELEASE"],
-    description: "Heavyweight leopard-print streetwear zip-up hoodie featuring a white embroidered graphic of a human heart and ribcage skeleton on the back.",
+    description: "Heavyweight leopard-print fleece zip-up hoodie featuring an anatomical custom chain-stitch graphic of a human heart and skeletal ribcage on the reverse.",
     specs: [
-      "Leopard-print streetwear heavy-duty fleece",
-      "White custom chest & back skeletal embroidery",
-      "Sizing, fabric details, and full specifications pending official collection release"
+      "Heavyweight leopard-print cotton fleece",
+      "Hand-guided white chain-stitch skeletal back embroidery",
+      "Oversized drop-shoulder construction"
     ]
   },
   {
     id: "OBJECT 02",
     name: "SADCREAM BLACK RHINESTONE ZIP-UP HOODIE",
-    price: "Price Pending",
-    mntPrice: "₮ TBD",
     primaryImage: campaign1,
     secondaryImage: null,
-    sizes: ["PENDING RELEASE"],
-    description: "High-end black streetwear zip-up hoodie detailed with silver rhinestone embellishments reflecting ambient street lighting.",
+    description: "Premium heavy-duty black cotton fleece zip-up hoodie featuring hand-set silver rhinestone contours.",
     specs: [
-      "Dense deep-black streetwear fleece",
-      "Silver rhinestone line embellishments",
-      "Sizing, fabric details, and full specifications pending official collection release"
+      "Dense deep-black heavyweight cotton fleece",
+      "Hand-placed silver rhinestone line detailing",
+      "Classic full-length front zipper closure"
     ]
   },
   {
     id: "OBJECT 03",
-    name: "SADCREAM LEOPARD ZIP-UP HOODIE (LOOKBOOK SHOT)",
-    price: "Price Pending",
-    mntPrice: "₮ TBD",
+    name: "SADCREAM LEOPARD ZIP-UP HOODIE (SLOUCHY SILHOUETTE)",
     primaryImage: campaign3,
     secondaryImage: campaign2,
-    sizes: ["PENDING RELEASE"],
-    description: "Heavyweight leopard-print streetwear zip-up hoodie styled in a loose drop-shoulder fit with comfortable slouchy proportions.",
+    description: "Oversized leopard-print fleece zip-up hoodie designed with an elegant drop-shoulder silhouette and relaxed proportions.",
     specs: [
-      "Oversized heavy-duty leopard fleece",
-      "Classic full zip closure and ribbed cuffs",
-      "Sizing, fabric details, and full specifications pending official collection release"
+      "Oversized heavyweight leopard-print fleece",
+      "Slouchy fit with relaxed body proportions",
+      "Double-lined hood with robust ribbing"
     ]
   }
 ];
 
 export default function FeaturedCollection() {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  const [selectedSize, setSelectedSize] = useState<string>("");
-  const [isAdded, setIsAdded] = useState(false);
 
   const handleOpenQuickView = (product: Product) => {
     setSelectedProduct(product);
-    setSelectedSize(product.sizes[1] || product.sizes[0]);
-    setIsAdded(false);
-  };
-
-  const handleAddToBag = () => {
-    setIsAdded(true);
-    setTimeout(() => {
-      setIsAdded(false);
-    }, 2000);
   };
 
   return (
@@ -98,18 +75,15 @@ export default function FeaturedCollection() {
         className="max-w-7xl mx-auto w-full mb-16 md:mb-28 text-left"
       >
         <span className="text-[10px] tracking-[0.4em] text-white/40 uppercase font-mono mb-3 block">
-          01 // NEW DROP
+          01 // LOOKBOOK OBJECTS
         </span>
         <h2 className="text-[42px] md:text-[64px] font-bold tracking-[-0.04em] font-display text-white leading-none">
           FEATURED DROP
         </h2>
-        <p className="text-[13px] tracking-wider text-white/50 font-light mt-3 italic">
-          Latest collection from SadCream.
-        </p>
       </motion.div>
 
       {/* 3-Column Product Grid with staggered entry effects */}
-      <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-3 gap-y-16 gap-x-12 items-start mb-20 md:mb-32">
+      <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-3 gap-y-16 gap-x-12 items-start mb-12">
         {PRODUCTS.map((product, index) => (
           <motion.div 
             key={product.id} 
@@ -160,59 +134,20 @@ export default function FeaturedCollection() {
             {/* Product Meta Section */}
             <div className="flex flex-col gap-3">
               <div className="flex justify-between items-start gap-4">
-                <h3 className="text-[15px] font-bold tracking-tight text-white group-hover:text-white/80 transition-colors duration-300 font-display">
+                <h3 className="text-[14px] font-bold tracking-tight text-white group-hover:text-white/85 transition-colors duration-300 font-display uppercase leading-snug">
                   {product.name}
                 </h3>
-                <div className="text-right">
-                  <span className="text-[14px] font-semibold text-white block">
-                    {product.price}
-                  </span>
-                  <span className="text-[10px] text-white/40 font-mono">
-                    {product.mntPrice}
-                  </span>
-                </div>
               </div>
 
-              {/* Sizes Available Row */}
-              <div className="flex gap-2 items-center flex-wrap">
-                <span className="text-[9px] tracking-widest text-white/30 uppercase font-mono mr-1">SIZES:</span>
-                {product.sizes.map((sz) => (
-                  <span 
-                    key={sz} 
-                    className="text-[10px] font-mono font-medium text-white/50 border border-white/5 px-2 py-0.5"
-                  >
-                    {sz}
-                  </span>
-                ))}
-              </div>
-
-              {/* View Product Button (Minimalist, luxury styling) */}
+              {/* View Specs Button (Minimalist, luxury styling) */}
               <div className="mt-4 pt-4 border-t border-white/[0.04] flex justify-between items-center text-[10px] tracking-[0.3em] uppercase font-semibold text-white/40 group-hover:text-white transition-all duration-300">
-                <span>VIEW PRODUCT</span>
+                <span>EXAMINE SPECIFICATIONS</span>
                 <ArrowRight size={12} className="transform -translate-x-1 group-hover:translate-x-0 transition-transform duration-300" />
               </div>
             </div>
           </motion.div>
         ))}
       </div>
-
-      {/* VIEW ALL Button at bottom of section */}
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1.0, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-        className="max-w-7xl mx-auto w-full flex justify-center"
-      >
-        <button className="group relative px-16 py-5 border border-white/10 hover:border-white/40 transition-colors duration-500 bg-transparent overflow-hidden cursor-pointer max-w-sm w-full">
-          <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
-          <span className="relative z-10 text-[11px] tracking-[0.3em] uppercase text-white/60 group-hover:text-black transition-colors duration-500 font-semibold">
-            VIEW ALL COLLECTIONS
-          </span>
-          <div className="absolute -right-1 -top-1 w-2 h-2 border-r border-t border-white/20"></div>
-          <div className="absolute -left-1 -bottom-1 w-2 h-2 border-l border-b border-white/20"></div>
-        </button>
-      </motion.div>
 
       {/* Premium Brutalist Drawer/Modal for Product Details */}
       <AnimatePresence>
@@ -246,19 +181,11 @@ export default function FeaturedCollection() {
               <div className="flex flex-col gap-10 mt-10">
                 <div>
                   <span className="text-[9px] tracking-[0.4em] text-white/40 uppercase font-mono block mb-2">
-                    PRODUCT OBJECT // {selectedProduct.id}
+                    DESIGN OBJECT // {selectedProduct.id}
                   </span>
-                  <h3 className="text-[24px] md:text-[32px] font-bold tracking-tight text-white font-display uppercase">
+                  <h3 className="text-[24px] md:text-[32px] font-bold tracking-tight text-white font-display uppercase leading-tight">
                     {selectedProduct.name}
                   </h3>
-                  <div className="flex items-baseline gap-4 mt-2">
-                    <span className="text-[20px] font-bold text-white font-display">
-                      {selectedProduct.price}
-                    </span>
-                    <span className="text-[12px] text-white/40 font-mono">
-                      {selectedProduct.mntPrice}
-                    </span>
-                  </div>
                 </div>
 
                 {/* Main Detailed Image and secondary thumbnail preview */}
@@ -287,7 +214,7 @@ export default function FeaturedCollection() {
                     ) : (
                       <div className="aspect-[3/4] w-full bg-white/[0.02] border border-dashed border-white/10 flex flex-col justify-center items-center p-4 text-center">
                         <span className="text-[9px] tracking-widest text-white/20 uppercase font-mono">
-                          NO REVERSE OBJECT
+                          NO REVERSE LOOK
                         </span>
                       </div>
                     )}
@@ -295,10 +222,10 @@ export default function FeaturedCollection() {
                     {/* Atelier Notes */}
                     <div className="bg-white/[0.02] p-4 border border-white/5">
                       <span className="text-[8px] tracking-widest text-white/40 uppercase font-mono block mb-1">
-                        RELEASE STATUS
+                        LOOKBOOK SPECIFICATION
                       </span>
                       <p className="text-[11px] leading-relaxed text-white/50 italic font-light">
-                        Lookbook preview only. Stock, pricing, and launch details pending official release.
+                        This item is part of lookbook preview 01. Complete pricing, release dates, and stock availability pending.
                       </p>
                     </div>
                   </div>
@@ -328,64 +255,15 @@ export default function FeaturedCollection() {
                     ))}
                   </ul>
                 </div>
-
-                {/* Size Selector */}
-                <div className="border-t border-white/10 pt-6">
-                  <div className="flex justify-between items-center mb-3">
-                    <span className="text-[9px] tracking-widest text-white/40 uppercase font-mono">
-                      SELECT SIZE
-                    </span>
-                    <span className="text-[9px] text-white/30 hover:text-white/70 cursor-pointer underline font-mono">
-                      SIZE GUIDE
-                    </span>
-                  </div>
-                  <div className="flex gap-3 flex-wrap">
-                    {selectedProduct.sizes.map((size) => (
-                      <button
-                        key={size}
-                        onClick={() => setSelectedSize(size)}
-                        className={`px-5 py-3 text-[11px] font-mono border transition-all cursor-pointer ${
-                          selectedSize === size
-                            ? "bg-white text-black border-white"
-                            : "bg-transparent text-white border-white/10 hover:border-white/40"
-                        }`}
-                      >
-                        {size}
-                      </button>
-                    ))}
-                  </div>
-                </div>
               </div>
 
-              {/* Add To Bag bottom control bar */}
-              <div className="mt-12 pt-6 border-t border-white/10 flex gap-4">
+              {/* Close Bottom Control Bar */}
+              <div className="mt-12 pt-6 border-t border-white/10">
                 <button
-                  onClick={handleAddToBag}
-                  className="flex-1 group relative py-5 bg-white text-black text-center font-semibold text-[11px] tracking-[0.3em] uppercase overflow-hidden cursor-pointer"
+                  onClick={() => setSelectedProduct(null)}
+                  className="w-full py-5 border border-white/25 bg-white/5 hover:bg-white hover:text-black transition-all duration-500 text-center font-semibold text-[11px] tracking-[0.3em] uppercase cursor-pointer"
                 >
-                  <AnimatePresence mode="wait">
-                    {isAdded ? (
-                      <motion.span 
-                        key="added" 
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        className="flex items-center justify-center gap-2"
-                      >
-                        <Check size={12} /> REGISTRATION COMPLETED
-                      </motion.span>
-                    ) : (
-                      <motion.span 
-                        key="add" 
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        className="flex items-center justify-center gap-2"
-                      >
-                        <ShoppingBag size={12} /> PRE-REGISTER INTEREST
-                      </motion.span>
-                    )}
-                  </AnimatePresence>
+                  CLOSE SPECIFICATION
                 </button>
               </div>
 
