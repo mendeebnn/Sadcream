@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, FormEvent } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { X, ArrowRight } from "lucide-react";
 
@@ -23,11 +23,11 @@ const PRODUCTS: Product[] = [
     name: "SADCREAM LEOPARD ZIP-UP HOODIE (BACK EMBROIDERY)",
     primaryImage: campaign4,
     secondaryImage: campaign3,
-    description: "Heavyweight leopard-print fleece zip-up hoodie featuring an anatomical custom chain-stitch graphic of a human heart and skeletal ribcage on the reverse.",
+    description: "Leopard-print zip-up hoodie featuring an anatomical graphic of a human heart and skeletal ribcage on the reverse.",
     specs: [
-      "Heavyweight leopard-print cotton fleece",
-      "Hand-guided white chain-stitch skeletal back embroidery",
-      "Oversized drop-shoulder construction"
+      "Leopard-print fleece pattern",
+      "White skeletal embroidery on the back",
+      "Relaxed drop-shoulder silhouette"
     ]
   },
   {
@@ -35,11 +35,11 @@ const PRODUCTS: Product[] = [
     name: "SADCREAM BLACK RHINESTONE ZIP-UP HOODIE",
     primaryImage: campaign1,
     secondaryImage: null,
-    description: "Premium heavy-duty black cotton fleece zip-up hoodie featuring hand-set silver rhinestone contours.",
+    description: "Black zip-up hoodie featuring silver rhinestone contours.",
     specs: [
-      "Dense deep-black heavyweight cotton fleece",
-      "Hand-placed silver rhinestone line detailing",
-      "Classic full-length front zipper closure"
+      "Deep-black knit fabric",
+      "Silver rhinestone line detailing",
+      "Front zip-up design"
     ]
   },
   {
@@ -47,20 +47,30 @@ const PRODUCTS: Product[] = [
     name: "SADCREAM LEOPARD ZIP-UP HOODIE (SLOUCHY SILHOUETTE)",
     primaryImage: campaign3,
     secondaryImage: campaign2,
-    description: "Oversized leopard-print fleece zip-up hoodie designed with an elegant drop-shoulder silhouette and relaxed proportions.",
+    description: "Oversized leopard-print zip-up hoodie designed with a relaxed drop-shoulder silhouette.",
     specs: [
-      "Oversized heavyweight leopard-print fleece",
+      "Oversized leopard-print knit pattern",
       "Slouchy fit with relaxed body proportions",
-      "Double-lined hood with robust ribbing"
+      "Integrated hood and ribbed finish"
     ]
   }
 ];
 
 export default function FeaturedCollection() {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [email, setEmail] = useState("");
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleOpenQuickView = (product: Product) => {
     setSelectedProduct(product);
+    setIsSubmitted(false);
+    setEmail("");
+  };
+
+  const handleRequestInfo = (e: FormEvent) => {
+    e.preventDefault();
+    if (!email) return;
+    setIsSubmitted(true);
   };
 
   return (
@@ -241,10 +251,10 @@ export default function FeaturedCollection() {
                   </p>
                 </div>
 
-                {/* Technical Specifications */}
+                {/* Observable Design Details */}
                 <div className="border-t border-white/10 pt-6">
                   <span className="text-[9px] tracking-widest text-white/40 uppercase font-mono block mb-4">
-                    TECHNICAL DATA
+                    OBSERVABLE DESIGN DETAILS
                   </span>
                   <ul className="flex flex-col gap-2">
                     {selectedProduct.specs.map((spec, idx) => (
@@ -254,6 +264,42 @@ export default function FeaturedCollection() {
                       </li>
                     ))}
                   </ul>
+                </div>
+
+                {/* Request Information Form (Editorial Action) */}
+                <div className="border-t border-white/10 pt-6">
+                  <span className="text-[9px] tracking-widest text-white/40 uppercase font-mono block mb-3">
+                    INQUIRE ABOUT THIS OBJECT
+                  </span>
+                  
+                  {isSubmitted ? (
+                    <motion.div 
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="bg-white/[0.02] p-4 border border-white/10 text-center"
+                    >
+                      <p className="text-[11px] tracking-[0.1em] text-white/80 font-medium uppercase">
+                        Inquiry Received. We will contact you at {email}.
+                      </p>
+                    </motion.div>
+                  ) : (
+                    <form onSubmit={handleRequestInfo} className="flex flex-col sm:flex-row gap-2 mt-2">
+                      <input 
+                        type="email" 
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="ENTER EMAIL FOR BRAND INQUIRIES" 
+                        className="flex-grow bg-white/[0.02] border border-white/10 px-4 py-3 text-[10px] tracking-widest uppercase font-mono text-white placeholder-white/30 focus:outline-none focus:border-white/25 transition-colors rounded-none"
+                        required
+                      />
+                      <button 
+                        type="submit"
+                        className="px-6 py-3 bg-white text-black font-semibold text-[10px] tracking-[0.2em] uppercase hover:bg-white/90 transition-colors cursor-pointer rounded-none"
+                      >
+                        REQUEST DETAILS
+                      </button>
+                    </form>
+                  )}
                 </div>
               </div>
 

@@ -156,7 +156,7 @@ export default function Hero() {
             {/* Description and Fixed CTA (Static) */}
             <div className="flex flex-col gap-8 items-start lg:items-end max-w-[320px] pointer-events-auto">
               <p className="text-[13px] leading-relaxed text-white/40 font-light lg:text-right italic">
-                Heavyweight drop-shoulder fleece, custom skeletal embroidery, and rhinestones. Captured in ambient twilight.
+                Oversized drop-shoulder outline, skeletal embroidery, and rhinestones. Captured in ambient twilight.
               </p>
 
               <div className="flex items-center gap-4 w-full justify-start lg:justify-end">
