@@ -61,7 +61,7 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 1.8, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
             className="absolute inset-0 w-full h-full"
             style={{ willChange: "opacity", backfaceVisibility: "hidden" }}
           >
@@ -158,6 +158,26 @@ export default function Hero() {
         <div className="text-[9px] tracking-[0.4em] uppercase text-white/20 font-mono writing-vertical transform rotate-180 mb-4 select-none">
           ULAANBAATAR // 2026
         </div>
+      </div>
+
+      {/* 6. Editorial Hero Image Counter */}
+      <div className="absolute bottom-10 right-6 md:right-12 z-30 pointer-events-none flex items-center gap-1.5 font-sans select-none text-[11px] text-white/60 font-medium">
+        <AnimatePresence mode="wait">
+          <motion.span
+            key={currentIndex}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4, ease: "easeInOut" }}
+            style={{ willChange: "opacity" }}
+          >
+            {String(currentIndex + 1).padStart(2, "0")}
+          </motion.span>
+        </AnimatePresence>
+        <span className="text-white/30">/</span>
+        <span className="text-white/40">
+          {String(CAMPAIGN_IMAGES.length).padStart(2, "0")}
+        </span>
       </div>
     </div>
   );
