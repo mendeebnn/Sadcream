@@ -43,7 +43,7 @@ export default function Footer() {
             </a>
             
             <a 
-              href="https://instagram.com/sadcream" 
+              href="https://www.instagram.com/sadcream_mongolia?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-[11px] tracking-[0.2em] uppercase text-white/50 hover:text-white transition-colors duration-300 flex items-center gap-1.5 focus:outline-none focus:ring-1 focus:ring-white/20 px-2 py-1"

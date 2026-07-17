@@ -129,16 +129,16 @@ export default function Contact() {
             
             <div className="flex justify-between items-center gap-4">
               <a 
-                href="https://instagram.com/sadcream" 
+                href="https://www.instagram.com/sadcream_mongolia?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-[18px] sm:text-[22px] font-medium tracking-tight hover:tracking-[0.05em] text-white transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] font-sans uppercase"
               >
-                @sadcream
+                @sadcream_mongolia
               </a>
 
               <a 
-                href="https://instagram.com/sadcream" 
+                href="https://www.instagram.com/sadcream_mongolia?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="p-3 border border-white/10 hover:border-white/40 text-white/40 hover:text-white transition-all duration-300 rounded-none flex items-center justify-center"
