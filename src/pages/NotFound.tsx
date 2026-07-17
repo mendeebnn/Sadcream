@@ -1,17 +1,27 @@
 import { Link } from "react-router-dom";
 import { ArrowLeft, ExternalLink } from "lucide-react";
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import { useSEO } from "../hooks/useSEO";
 import Footer from "../components/Footer";
+import { BRAND_CONFIG } from "../brand";
 
 export default function NotFound() {
+  const shouldReduceMotion = useReducedMotion();
+
   useSEO({
-    title: "SADCREAM // PAGE NOT FOUND",
-    description: "The requested archival page or look does not exist. Return to the SADCREAM Mongolia campaign lookbook.",
+    title: `${BRAND_CONFIG.name} // PAGE NOT FOUND`,
+    description: `The requested archival page or look does not exist. Return to the ${BRAND_CONFIG.name} Mongolia campaign lookbook.`,
   });
 
   return (
-    <div className="min-h-screen bg-[#080808] text-[#f4f4f4] font-sans flex flex-col justify-between relative select-none">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.5, ease: "easeInOut" }}
+      className="min-h-screen bg-[#080808] text-[#f4f4f4] font-sans flex flex-col justify-between relative select-none"
+    >
+
       
       {/* Editorial Grid Background Accent */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden opacity-[0.08]">
@@ -33,11 +43,12 @@ export default function NotFound() {
           </Link>
           
           <div className="flex flex-col items-end">
-            <span className="text-[12px] font-bold tracking-tighter leading-none font-display text-white">SADCREAM</span>
+            <span className="text-[12px] font-bold tracking-tighter leading-none font-display text-white">{BRAND_CONFIG.name}</span>
             <span className="text-[8px] tracking-[0.3em] font-medium text-white/40 uppercase">Mongolia Campaign</span>
           </div>
         </div>
       </header>
+
 
       {/* Main 404 content */}
       <main className="relative z-10 flex-grow flex items-center justify-center max-w-7xl mx-auto px-6 md:px-12 py-16">
@@ -78,6 +89,6 @@ export default function NotFound() {
       </main>
 
       <Footer />
-    </div>
+    </motion.div>
   );
 }

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Volume2, VolumeX } from "lucide-react";
+import { BRAND_CONFIG } from "../brand";
 
 // Import our custom-generated original SadCream campaign images
 import campaign1 from "../assets/images/sadcream_brz_night_1784087879953.jpg";
@@ -83,7 +84,7 @@ export default function Hero() {
           <div className="absolute top-1/2 left-0 w-full h-[1px] bg-white/5"></div>
           <div className="absolute top-0 left-1/2 w-[1px] h-full bg-white/5"></div>
           <div className="absolute top-6 right-6 text-[8px] text-white/20 tracking-[0.4em] uppercase font-mono">
-            ULAANBAATAR // Lookbook 01
+            {BRAND_CONFIG.timezone} // Lookbook 01
           </div>
         </div>
       </div>
@@ -91,8 +92,8 @@ export default function Hero() {
       {/* 3. Transparent Navigation Header */}
       <header className="absolute top-0 left-0 w-full z-30 px-6 md:px-12 py-10 flex justify-between items-end">
         <div className="flex flex-col gap-1 pointer-events-auto">
-          <span className="text-[14px] font-bold tracking-tighter leading-none font-display">SADCREAM</span>
-          <span className="text-[9px] tracking-[0.3em] font-medium text-white/40 uppercase">MONGOLIA</span>
+          <span className="text-[14px] font-bold tracking-tighter leading-none font-display">{BRAND_CONFIG.name}</span>
+          <span className="text-[9px] tracking-[0.3em] font-medium text-white/40 uppercase">{BRAND_CONFIG.location.split(" // ")[1] || "MONGOLIA"}</span>
         </div>
 
         <div className="hidden md:flex gap-12 items-center text-[10px] tracking-[0.2em] font-medium uppercase text-white/60 pointer-events-auto">
@@ -114,14 +115,14 @@ export default function Hero() {
             <div className="max-w-4xl pointer-events-auto">
               <div className="overflow-visible mb-6">
                 <h1 className="text-[clamp(3.5rem,18.5vw,18rem)] leading-[0.71] font-bold tracking-[-0.08em] font-display text-white select-none whitespace-nowrap">
-                  SADCREAM
+                  {BRAND_CONFIG.name}
                 </h1>
               </div>
 
               <div className="flex items-center gap-6">
                 <div className="w-12 h-[1px] bg-white/30"></div>
                 <p className="text-[12px] tracking-[0.15em] font-light text-white/60 uppercase italic">
-                  LOOK 01 // MONGOLIA
+                  LOOK 01 // {BRAND_CONFIG.location.split(" // ")[1] || "MONGOLIA"}
                 </p>
               </div>
             </div>
@@ -150,7 +151,7 @@ export default function Hero() {
       {/* 5. Right-Aligned vertical-rl branding badge */}
       <div className="absolute bottom-0 right-0 p-12 hidden md:flex flex-col gap-2 items-end z-30 pointer-events-none">
         <div className="text-[9px] tracking-[0.4em] uppercase text-white/20 font-mono writing-vertical transform rotate-180 mb-4 select-none">
-          ULAANBAATAR // 2026
+          {BRAND_CONFIG.timezone} // {new Date().getFullYear()}
         </div>
       </div>
 

@@ -1,13 +1,16 @@
 import { useState, useEffect, FormEvent } from "react";
 import { useParams, Link } from "react-router-dom";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 import { ArrowLeft, ArrowRight, ShieldCheck, ArrowUpRight } from "lucide-react";
 import { PRODUCTS } from "../data";
 import { useSEO } from "../hooks/useSEO";
 import Footer from "../components/Footer";
+import { BRAND_CONFIG } from "../brand";
 
 export default function ProductDetail() {
   const { id } = useParams<{ id: string }>();
+  const shouldReduceMotion = useReducedMotion();
+  const [isLoading, setIsLoading] = useState(true);
   
   // Find product by matching slug/id (case insensitive, hyphens or spaces)
   const product = PRODUCTS.find(
@@ -16,12 +19,21 @@ export default function ProductDetail() {
       p.id.replace("-", " ").toLowerCase() === id?.toLowerCase()
   );
 
+  // Simulated premium loading phase (600ms) when ID changes to show the skeletal loading states
+  useEffect(() => {
+    setIsLoading(true);
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 600);
+    return () => clearTimeout(timer);
+  }, [id]);
+
   // Dynamic SEO metadata injection
   useSEO({
-    title: product ? `SADCREAM // ${product.id}` : "SADCREAM // LOOK NOT FOUND",
+    title: product ? `${BRAND_CONFIG.name} // ${product.id}` : `${BRAND_CONFIG.name} // LOOK NOT FOUND`,
     description: product 
-      ? `Explore ${product.id} from the SADCREAM Mongolia Campaign. ${product.description}`
-      : "The requested campaign look could not be located in current records. Explore the SADCREAM Mongolia lookbook.",
+      ? `Explore ${product.id} from the ${BRAND_CONFIG.name} Mongolia Campaign. ${product.description}`
+      : `The requested campaign look could not be located in current records. Explore the ${BRAND_CONFIG.name} Mongolia lookbook.`,
     image: product?.primaryImage,
   });
 
@@ -77,7 +89,7 @@ export default function ProductDetail() {
             </Link>
             
             <div className="flex flex-col items-end">
-              <span className="text-[12px] font-bold tracking-tighter leading-none font-display text-white">SADCREAM</span>
+              <span className="text-[12px] font-bold tracking-tighter leading-none font-display text-white">{BRAND_CONFIG.name}</span>
               <span className="text-[8px] tracking-[0.3em] font-medium text-white/40 uppercase">Mongolia Campaign</span>
             </div>
           </div>
@@ -151,8 +163,106 @@ export default function ProductDetail() {
   const activeProduct = product;
   const relatedProducts = PRODUCTS.filter((p) => p.id !== activeProduct.id);
 
+  // Render highly-polished skeletal loading skeleton matching look and feel
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-[#080808] text-[#f4f4f4] font-sans relative select-none">
+        
+        {/* Editorial Grid Background Accent */}
+        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden opacity-[0.12]">
+          <div className="w-[85%] h-full mx-auto border-x border-white/[0.03] relative">
+            <div className="absolute top-[20%] left-0 w-full h-[1px] bg-white/[0.03]"></div>
+            <div className="absolute top-[45%] left-0 w-full h-[1px] bg-white/[0.03]"></div>
+            <div className="absolute top-[75%] left-0 w-full h-[1px] bg-white/[0.03]"></div>
+          </div>
+        </div>
+
+        {/* Header Bar */}
+        <header className="sticky top-0 z-40 bg-[#080808]/85 backdrop-blur-md border-b border-white/[0.04] px-6 md:px-12 py-6">
+          <div className="max-w-7xl mx-auto flex justify-between items-center">
+            <div className="flex items-center gap-3 text-[11px] text-white/20 uppercase">
+              <div className="w-4 h-4 bg-white/5 rounded-none animate-pulse" />
+              <div className="w-24 h-3 bg-white/5 animate-pulse" />
+            </div>
+            
+            <div className="flex flex-col items-end gap-1">
+              <div className="w-20 h-4 bg-white/5 animate-pulse" />
+              <div className="w-16 h-2 bg-white/5 animate-pulse" />
+            </div>
+          </div>
+        </header>
+
+        {/* Main Page Layout Container */}
+        <main className="relative z-10 pb-32 max-w-7xl mx-auto px-6 md:px-12 pt-12 md:pt-20">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
+            
+            {/* LEFT: Hero Image Skeleton */}
+            <div className="lg:col-span-7 flex flex-col gap-6">
+              <div className="relative aspect-[3/4] w-full bg-white/[0.02] border border-white/5 overflow-hidden flex items-center justify-center">
+                <div className="absolute top-4 left-4 bg-white/5 border border-white/5 w-24 h-4 animate-pulse" />
+                <div className="w-full h-full bg-gradient-to-r from-transparent via-white/[0.02] to-transparent bg-[length:200%_100%] animate-shimmer absolute inset-0" />
+              </div>
+              {/* Thumbnails Skeleton */}
+              <div className="flex gap-3 overflow-x-auto pb-2">
+                {[1, 2, 3].map((i) => (
+                  <div key={i} className="w-20 h-24 bg-white/[0.02] border border-white/5 flex-shrink-0 animate-pulse" />
+                ))}
+              </div>
+            </div>
+
+            {/* RIGHT: High-Contrast Metadata & Specs Skeleton */}
+            <div className="lg:col-span-5 flex flex-col gap-10">
+              <div className="flex flex-col gap-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-16 h-3 bg-white/5 animate-pulse" />
+                  <div className="w-8 h-[1px] bg-white/20"></div>
+                  <div className="w-20 h-3 bg-white/5 animate-pulse" />
+                </div>
+                <div className="w-3/4 h-8 bg-white/5 animate-pulse" />
+                <div className="w-1/2 h-8 bg-white/5 animate-pulse" />
+              </div>
+
+              <div className="border-t border-white/[0.06] pt-6 flex flex-col gap-3">
+                <div className="w-24 h-3 bg-white/5 animate-pulse" />
+                <div className="w-full h-4 bg-white/5 animate-pulse" />
+                <div className="w-5/6 h-4 bg-white/5 animate-pulse" />
+              </div>
+
+              <div className="border-t border-white/[0.06] pt-6 flex flex-col gap-4">
+                <div className="w-24 h-3 bg-white/5 animate-pulse" />
+                <div className="flex flex-col gap-3">
+                  {[1, 2, 3, 4].map((i) => (
+                    <div key={i} className="flex gap-4 items-center">
+                      <div className="w-6 h-3 bg-white/5 animate-pulse" />
+                      <div className="w-2/3 h-3 bg-white/5 animate-pulse" />
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="border-t border-white/[0.06] pt-6 flex flex-col gap-4 bg-white/[0.01] p-6 border border-white/[0.03]">
+                <div className="w-28 h-3 bg-white/5 animate-pulse" />
+                <div className="w-full h-3 bg-white/5 animate-pulse" />
+                <div className="w-4/5 h-3 bg-white/5 animate-pulse" />
+                <div className="w-full h-12 bg-white/5 mt-2 animate-pulse" />
+              </div>
+            </div>
+
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
   return (
-    <div className="min-h-screen bg-[#080808] text-[#f4f4f4] font-sans relative select-none">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.5, ease: "easeInOut" }}
+      className="min-h-screen bg-[#080808] text-[#f4f4f4] font-sans relative select-none"
+    >
       
       {/* Editorial Grid Background Accent */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden opacity-[0.12]">
@@ -175,11 +285,12 @@ export default function ProductDetail() {
           </Link>
           
           <div className="flex flex-col items-end">
-            <span className="text-[12px] font-bold tracking-tighter leading-none font-display text-white">SADCREAM</span>
+            <span className="text-[12px] font-bold tracking-tighter leading-none font-display text-white">{BRAND_CONFIG.name}</span>
             <span className="text-[8px] tracking-[0.3em] font-medium text-white/40 uppercase">Mongolia Campaign</span>
           </div>
         </div>
       </header>
+
 
       {/* Main Page Layout Container */}
       <main className="relative z-10 pb-32">
@@ -506,7 +617,7 @@ export default function ProductDetail() {
 
       </main>
       <Footer />
-    </div>
+    </motion.div>
   );
 }
 

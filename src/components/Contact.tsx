@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { ArrowUpRight, Copy, Check, Instagram, Mail } from "lucide-react";
+import { BRAND_CONFIG } from "../brand";
 
 export default function Contact() {
   const [copied, setCopied] = useState(false);
-  const emailAddress = "atelier@sadcream.com";
+  const emailAddress = BRAND_CONFIG.contactEmail;
 
   const handleCopyEmail = async () => {
     try {
@@ -129,7 +130,7 @@ export default function Contact() {
             
             <div className="flex justify-between items-center gap-4">
               <a 
-                href="https://www.instagram.com/sadcream_mongolia?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" 
+                href={BRAND_CONFIG.instagramUrl} 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-[18px] sm:text-[22px] font-medium tracking-tight hover:tracking-[0.05em] text-white transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] font-sans uppercase"
@@ -138,7 +139,7 @@ export default function Contact() {
               </a>
 
               <a 
-                href="https://www.instagram.com/sadcream_mongolia?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" 
+                href={BRAND_CONFIG.instagramUrl} 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="p-3 border border-white/10 hover:border-white/40 text-white/40 hover:text-white transition-all duration-300 rounded-none flex items-center justify-center"
@@ -158,8 +159,8 @@ export default function Contact() {
             transition={{ duration: 1.5, delay: 0.4 }}
             className="flex justify-between items-center text-[10px] tracking-wider text-white/50 font-mono"
           >
-            <span>ATELIER HOURS // BY APPOINTMENT</span>
-            <span>ULAANBAATAR</span>
+            <span>{BRAND_CONFIG.atelierHours}</span>
+            <span>{BRAND_CONFIG.timezone}</span>
           </motion.div>
 
         </div>

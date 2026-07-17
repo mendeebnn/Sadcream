@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
 import { ArrowUp, Instagram, Mail } from "lucide-react";
+import { BRAND_CONFIG } from "../brand";
 
 export default function Footer() {
   const handleScrollToTop = () => {
@@ -8,8 +9,6 @@ export default function Footer() {
       behavior: "smooth"
     });
   };
-
-  const currentYear = new Date().getFullYear();
 
   return (
     <footer className="bg-black text-[#f4f4f4] border-t border-white/[0.04] py-16 px-6 md:px-12 relative overflow-hidden">
@@ -25,17 +24,17 @@ export default function Footer() {
           {/* Logo & Meta block */}
           <div className="flex flex-col gap-2">
             <span className="text-[18px] font-bold tracking-tighter leading-none font-display text-white">
-              SADCREAM
+              {BRAND_CONFIG.name}
             </span>
             <span className="text-[9px] tracking-[0.35em] font-medium text-white/40 uppercase">
-              ULAANBAATAR // MONGOLIA
+              {BRAND_CONFIG.location}
             </span>
           </div>
 
           {/* Social Channels / Quick Links */}
           <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
             <a 
-              href="mailto:atelier@sadcream.com"
+              href={`mailto:${BRAND_CONFIG.contactEmail}`}
               className="text-[11px] tracking-[0.2em] uppercase text-white/50 hover:text-white transition-colors duration-300 flex items-center gap-1.5 focus:outline-none focus:ring-1 focus:ring-white/20 px-2 py-1"
             >
               <Mail size={12} className="opacity-60" />
@@ -43,7 +42,7 @@ export default function Footer() {
             </a>
             
             <a 
-              href="https://www.instagram.com/sadcream_mongolia?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" 
+              href={BRAND_CONFIG.instagramUrl} 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-[11px] tracking-[0.2em] uppercase text-white/50 hover:text-white transition-colors duration-300 flex items-center gap-1.5 focus:outline-none focus:ring-1 focus:ring-white/20 px-2 py-1"
@@ -81,7 +80,7 @@ export default function Footer() {
           </div>
 
           <div className="flex flex-col md:items-end justify-end gap-1 font-mono">
-            <span>© {currentYear} SADCREAM. ALL RIGHTS RESERVED.</span>
+            <span>{BRAND_CONFIG.copyright}</span>
           </div>
 
         </div>
@@ -90,3 +89,4 @@ export default function Footer() {
     </footer>
   );
 }
+
