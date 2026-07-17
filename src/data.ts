@@ -21,7 +21,8 @@ export const PRODUCTS: Product[] = [
       "Ribbed cuffs and hem"
     ],
     additionalImages: [campaign2, campaign1],
-    story: "Presented in an evening setting, the garment features a contrasting white graphic positioned centrally across the back, standing out against the detailed leopard print."
+    story: "Presented in an evening setting, the garment features a contrasting white graphic positioned centrally across the back, standing out against the detailed leopard print.",
+    price: 185000, category: "Hoodies", sizes: ["S", "M", "L", "XL"], stock: 12
   },
   {
     id: "LOOK-02",
@@ -37,7 +38,8 @@ export const PRODUCTS: Product[] = [
       "Relaxed sleeves"
     ],
     additionalImages: [campaign3, campaign2],
-    story: "Captured at night, the linear crystal accents catch ambient direct light, creating high-contrast outlines along the shoulder and arm seams."
+    story: "Captured at night, the linear crystal accents catch ambient direct light, creating high-contrast outlines along the shoulder and arm seams.",
+    price: 210000, category: "Hoodies", sizes: ["S", "M", "L", "XL"], stock: 8
   },
   {
     id: "LOOK-03",
@@ -53,6 +55,7 @@ export const PRODUCTS: Product[] = [
       "Elasticated cuffs and hem"
     ],
     additionalImages: [campaign1, campaign4],
-    story: "The styling illustrates a relaxed drape and loose fit, showing the stacking of the leopard-patterned sleeves around the wrists."
+    story: "The styling illustrates a relaxed drape and loose fit, showing the stacking of the leopard-patterned sleeves around the wrists.",
+    price: 185000, category: "Hoodies", sizes: ["S", "M", "L"], stock: 10
   }
 ];

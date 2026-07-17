@@ -1,11 +1,12 @@
 import { useState, useEffect, FormEvent } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion, AnimatePresence, useReducedMotion } from "motion/react";
-import { ArrowLeft, ArrowRight, ShieldCheck, ArrowUpRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, ShieldCheck, ArrowUpRight, ShoppingBag } from "lucide-react";
 import { PRODUCTS } from "../data";
 import { useSEO } from "../hooks/useSEO";
 import Footer from "../components/Footer";
 import { BRAND_CONFIG } from "../brand";
+import { useShop } from "../context/ShopContext";
 
 export default function ProductDetail() {
   const { id } = useParams<{ id: string }>();
@@ -49,6 +50,8 @@ export default function ProductDetail() {
   const [activeImage, setActiveImage] = useState(galleryImages[0] || "");
   const [email, setEmail] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [size, setSize] = useState("");
+  const { addToCart } = useShop();
 
   // Sync active image when product changes or component mounts
   useEffect(() => {
@@ -390,6 +393,7 @@ export default function ProductDetail() {
                 <h1 className="text-[32px] md:text-[40px] font-bold tracking-tight text-white font-display uppercase leading-[1.1]">
                   {activeProduct.name}
                 </h1>
+                <p className="text-[16px] text-white/80 font-mono">₮{activeProduct.price.toLocaleString()}</p>
               </div>
 
               {/* Short Description Section */}
@@ -415,6 +419,12 @@ export default function ProductDetail() {
                     </li>
                   ))}
                 </ul>
+              </div>
+
+              <div className="border-t border-white/[0.06] pt-6 flex flex-col gap-4">
+                <span className="text-[9px] tracking-[0.3em] text-white/30 uppercase font-mono font-medium">Select size // {activeProduct.stock} available</span>
+                <div className="flex gap-2">{activeProduct.sizes.map((option) => <button key={option} onClick={() => setSize(option)} className={`w-11 h-10 border text-[10px] font-mono ${size === option ? "border-white bg-white text-black" : "border-white/20 text-white hover:border-white/60"}`} aria-pressed={size === option}>{option}</button>)}</div>
+                <button disabled={!size} onClick={() => addToCart(activeProduct.id, size)} className="w-full py-4 bg-white text-black disabled:bg-white/20 disabled:text-white/40 font-bold text-[10px] tracking-[.25em] uppercase flex items-center justify-center gap-2"><ShoppingBag size={13}/>{size ? `Add ${size} to bag` : "Select size"}</button>
               </div>
 
               {/* Atelier Concierge Ticket (No pricing, no ecommerce) */}

@@ -8,10 +8,13 @@ import Home from "./pages/Home";
 import ProductDetail from "./pages/ProductDetail";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
+import { ShopProvider } from "./context/ShopContext";
+import StoreHeader from "./components/StoreHeader";
 
 export default function App() {
   return (
     <BrowserRouter>
+      <ShopProvider>
       <ScrollToTop />
       <div className="bg-black min-h-screen selection:bg-white selection:text-black relative overflow-x-hidden">
         {/* Ultra-subtle photographic film grain overlay */}
@@ -27,7 +30,9 @@ export default function App() {
           <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <StoreHeader />
       </div>
+      </ShopProvider>
     </BrowserRouter>
   );
 }

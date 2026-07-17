@@ -2,8 +2,11 @@ import { motion } from "motion/react";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { PRODUCTS } from "../data";
+import { Heart } from "lucide-react";
+import { useShop } from "../context/ShopContext";
 
 export default function FeaturedCollection() {
+  const { wishlist, toggleWishlist } = useShop();
   return (
     <section id="featured-collection" className="bg-black text-[#f4f4f4] py-24 md:py-40 px-6 md:px-12 w-full min-h-screen flex flex-col justify-between border-t border-white/[0.04]">
       
@@ -40,6 +43,7 @@ export default function FeaturedCollection() {
             >
               {/* Image Container with Custom Hover Aspect Ratio & Crossfade */}
               <div className="relative aspect-[3/4] w-full bg-[#0d0d0d] overflow-hidden mb-6 border border-white/[0.03] flex items-center justify-center">
+                <button onClick={(event) => { event.preventDefault(); toggleWishlist(product.id); }} className="absolute z-20 top-4 right-4 p-2 bg-black/50 border border-white/10 hover:border-white/50" aria-label={`${wishlist.includes(product.id) ? "Remove" : "Add"} ${product.name} ${wishlist.includes(product.id) ? "from" : "to"} wishlist`}><Heart size={13} fill={wishlist.includes(product.id) ? "currentColor" : "none"}/></button>
                 
                 {/* Main Image */}
                 <img
@@ -81,6 +85,7 @@ export default function FeaturedCollection() {
                   <h3 className="text-[14px] font-bold tracking-tight text-white group-hover:text-white/85 transition-colors duration-300 font-display uppercase leading-snug">
                     {product.name}
                   </h3>
+                  <span className="text-[11px] text-white/60 font-mono whitespace-nowrap">₮{product.price.toLocaleString()}</span>
                 </div>
 
                 {/* View Specs Button (Minimalist, luxury styling) */}
