@@ -10,6 +10,8 @@ import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
 import { ShopProvider } from "./context/ShopContext";
 import StoreHeader from "./components/StoreHeader";
+import Checkout from "./pages/Checkout";
+import Payment from "./pages/Payment";
 
 export default function App() {
   return (
@@ -28,6 +30,8 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/product/:id" element={<ProductDetail />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/payment/:id" element={<Payment />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <StoreHeader />
