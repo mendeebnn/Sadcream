@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { motion, AnimatePresence } from "motion/react";
 import { ArrowLeft, ArrowRight, ShieldCheck } from "lucide-react";
 import { PRODUCTS } from "../data";
+import Footer from "../components/Footer";
 
 export default function ProductDetail() {
   const { id } = useParams<{ id: string }>();
@@ -273,6 +274,7 @@ export default function ProductDetail() {
         </div>
 
       </main>
+      <Footer />
     </div>
   );
 }

@@ -48,6 +48,10 @@ export default function Hero() {
     document.getElementById("featured-collection")?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const handleScrollToContact = () => {
+    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+  };
+
   const activeImage = CAMPAIGN_IMAGES[currentIndex];
 
   return (
@@ -100,14 +104,15 @@ export default function Hero() {
           <span className="text-[9px] tracking-[0.3em] font-medium text-white/40 uppercase">MONGOLIA</span>
         </div>
 
-        <div className="hidden md:flex gap-16 items-center text-[10px] tracking-[0.2em] font-medium uppercase text-white/60">
-          <span onClick={handleScrollToDrop} className="hover:text-[#f4f4f4] cursor-pointer transition-colors duration-300">COLLECTIONS</span>
-          <span onClick={handleScrollToDrop} className="hover:text-[#f4f4f4] cursor-pointer transition-colors duration-300">LOOKBOOK</span>
-          <span onClick={handleScrollToDrop} className="hover:text-[#f4f4f4] cursor-pointer transition-colors duration-300">OBJECTS</span>
+        <div className="hidden md:flex gap-12 items-center text-[10px] tracking-[0.2em] font-medium uppercase text-white/60 pointer-events-auto">
+          <button onClick={handleScrollToDrop} className="hover:text-[#f4f4f4] cursor-pointer transition-colors duration-300 bg-transparent border-none p-0 outline-none focus-visible:ring-1 focus-visible:ring-white/40 px-1 text-left">COLLECTIONS</button>
+          <button onClick={handleScrollToDrop} className="hover:text-[#f4f4f4] cursor-pointer transition-colors duration-300 bg-transparent border-none p-0 outline-none focus-visible:ring-1 focus-visible:ring-white/40 px-1 text-left">LOOKBOOK</button>
+          <button onClick={handleScrollToDrop} className="hover:text-[#f4f4f4] cursor-pointer transition-colors duration-300 bg-transparent border-none p-0 outline-none focus-visible:ring-1 focus-visible:ring-white/40 px-1 text-left">OBJECTS</button>
+          <button onClick={handleScrollToContact} className="hover:text-[#f4f4f4] cursor-pointer transition-colors duration-300 bg-transparent border-none p-0 outline-none focus-visible:ring-1 focus-visible:ring-white/40 px-1 text-left">CONTACT</button>
         </div>
 
         <div className="flex items-center gap-8 pointer-events-auto text-[10px] tracking-[0.2em] uppercase text-white/60">
-          <span onClick={handleScrollToDrop} className="hover:text-[#f4f4f4] cursor-pointer transition-colors duration-300 text-white/40">PRE-RELEASE</span>
+          <button onClick={handleScrollToDrop} className="hover:text-[#f4f4f4] cursor-pointer transition-colors duration-300 text-white/40 bg-transparent border-none p-0 outline-none focus-visible:ring-1 focus-visible:ring-white/40 px-1 text-left">PRE-RELEASE</button>
         </div>
       </header>
 
@@ -136,7 +141,7 @@ export default function Hero() {
             <div className="flex flex-col items-start lg:items-end pointer-events-auto mt-4 lg:mt-0">
               <button 
                 onClick={handleScrollToDrop} 
-                className="group relative px-10 py-5 border border-white/20 bg-white/5 backdrop-blur-md overflow-hidden cursor-pointer w-full sm:w-auto"
+                className="group relative px-10 py-5 border border-white/20 bg-white/5 backdrop-blur-md overflow-hidden cursor-pointer w-full sm:w-auto focus:outline-none focus-visible:ring-1 focus-visible:ring-white/50"
               >
                 <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
                 <span className="relative z-10 text-[11px] tracking-[0.3em] uppercase group-hover:text-black transition-colors duration-500 font-semibold text-white">
