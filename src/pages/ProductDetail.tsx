@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { motion, AnimatePresence } from "motion/react";
 import { ArrowLeft, ArrowRight, ShieldCheck, ArrowUpRight } from "lucide-react";
 import { PRODUCTS } from "../data";
+import { useSEO } from "../hooks/useSEO";
 import Footer from "../components/Footer";
 
 export default function ProductDetail() {
@@ -15,26 +16,38 @@ export default function ProductDetail() {
       p.id.replace("-", " ").toLowerCase() === id?.toLowerCase()
   );
 
-  // Fallback to first product if none matched
+  // Dynamic SEO metadata injection
+  useSEO({
+    title: product ? `SADCREAM // ${product.id}` : "SADCREAM // LOOK NOT FOUND",
+    description: product 
+      ? `Explore ${product.id} from the SADCREAM Mongolia Campaign. ${product.description}`
+      : "The requested campaign look could not be located in current records. Explore the SADCREAM Mongolia lookbook.",
+    image: product?.primaryImage,
+  });
+
   const activeProduct = product || PRODUCTS[0];
 
-  // Group all available images into a single gallery
-  const galleryImages: string[] = [
-    activeProduct.primaryImage,
-    ...(activeProduct.secondaryImage ? [activeProduct.secondaryImage] : []),
-    ...(activeProduct.additionalImages || [])
-  ];
+  // Group all available images into a single gallery safely
+  const galleryImages: string[] = product 
+    ? [
+        activeProduct.primaryImage,
+        ...(activeProduct.secondaryImage ? [activeProduct.secondaryImage] : []),
+        ...(activeProduct.additionalImages || [])
+      ]
+    : [];
 
-  const [activeImage, setActiveImage] = useState(galleryImages[0]);
+  const [activeImage, setActiveImage] = useState(galleryImages[0] || "");
   const [email, setEmail] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   // Sync active image when product changes or component mounts
   useEffect(() => {
-    setActiveImage(galleryImages[0]);
+    if (product && galleryImages.length > 0) {
+      setActiveImage(galleryImages[0]);
+    }
     setIsSubmitted(false);
     setEmail("");
-  }, [id]);
+  }, [id, product]);
 
   const handleInquirySubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -44,6 +57,100 @@ export default function ProductDetail() {
 
   // Find other looks for the "Related Pieces" section
   const relatedProducts = PRODUCTS.filter((p) => p.id !== activeProduct.id);
+
+  // Return custom Product Not Found layout if product doesn't exist
+  if (!product) {
+    return (
+      <div className="min-h-screen bg-[#080808] text-[#f4f4f4] font-sans flex flex-col justify-between relative select-none">
+        
+        {/* Editorial Grid Background Accent */}
+        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden opacity-[0.08]">
+          <div className="w-[85%] h-full mx-auto border-x border-white/[0.03] relative">
+            <div className="absolute top-[30%] left-0 w-full h-[1px] bg-white/[0.03]"></div>
+          </div>
+        </div>
+
+        {/* Header Bar */}
+        <header className="sticky top-0 z-40 bg-[#080808]/85 backdrop-blur-md border-b border-white/[0.04] px-6 md:px-12 py-6">
+          <div className="max-w-7xl mx-auto flex justify-between items-center">
+            <Link 
+              to="/" 
+              className="text-[10px] tracking-[0.3em] font-mono hover:text-white/70 transition-colors focus:outline-none focus-visible:ring-1 focus-visible:ring-white/40 px-2 py-1"
+              aria-label="Back to home index"
+            >
+              INDEX // HOME
+            </Link>
+            
+            <div className="flex flex-col items-end">
+              <span className="text-[12px] font-bold tracking-tighter leading-none font-display text-white">SADCREAM</span>
+              <span className="text-[8px] tracking-[0.3em] font-medium text-white/40 uppercase">Mongolia Campaign</span>
+            </div>
+          </div>
+        </header>
+
+        {/* Not Found Main Area */}
+        <main className="relative z-10 flex-grow max-w-7xl mx-auto w-full px-6 md:px-12 py-16 flex flex-col justify-center gap-16">
+          <div className="max-w-xl">
+            <span className="text-[10px] tracking-[0.4em] text-white/40 uppercase font-mono mb-3 block">
+              CAMPAIGN INDEX // LOOK NOT REGISTERED
+            </span>
+            <h1 className="text-[32px] md:text-[48px] font-bold tracking-tight text-white font-display uppercase mb-4">
+              LOOK '{id}' NOT FOUND
+            </h1>
+            <p className="text-[13px] leading-relaxed text-white/50 font-light italic mb-8">
+              The requested sequence index is not registered in this campaign records. Below is the registered campaign index available for exploration.
+            </p>
+            <Link
+              to="/"
+              className="inline-flex items-center gap-3 border border-white/10 hover:border-white/40 bg-white/5 hover:bg-white/10 text-white font-bold text-[10px] tracking-[0.25em] uppercase px-6 py-4 transition-all duration-300 rounded-none focus:outline-none focus-visible:ring-1 focus-visible:ring-white/40"
+            >
+              <ArrowLeft size={11} />
+              <span>RETURN TO MAIN INDEX</span>
+            </Link>
+          </div>
+
+          {/* Grid of registered looks */}
+          <div className="border-t border-white/[0.06] pt-12">
+            <span className="text-[10px] tracking-[0.4em] text-white/35 uppercase font-mono block mb-8">
+              REGISTERED CAMPAIGN LOOKS
+            </span>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {PRODUCTS.map((p) => (
+                <Link
+                  key={p.id}
+                  to={`/product/${p.id}`}
+                  className="group flex flex-col gap-4"
+                >
+                  <div className="aspect-[3/4] bg-[#0d0d0d] border border-white/10 overflow-hidden relative">
+                    <img 
+                      src={p.primaryImage} 
+                      alt={p.name} 
+                      className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                      loading="lazy"
+                      referrerPolicy="no-referrer"
+                    />
+                    <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-sm border border-white/10 px-2.5 py-1 text-[8px] tracking-[0.2em] font-mono text-white/80">
+                      {p.id}
+                    </div>
+                  </div>
+                  <div className="flex flex-col gap-1">
+                    <h3 className="text-[12px] font-bold tracking-tight text-white font-display uppercase group-hover:text-white/85 transition-colors">
+                      {p.name}
+                    </h3>
+                    <span className="text-[10px] tracking-[0.15em] text-white/40 uppercase font-mono flex items-center gap-1.5">
+                      Explore Look <ArrowRight size={10} className="transform group-hover:translate-x-1 transition-transform" />
+                    </span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </main>
+
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#080808] text-[#f4f4f4] font-sans relative select-none">
@@ -132,7 +239,8 @@ export default function ProductDetail() {
                     <button
                       key={index}
                       onClick={() => setActiveImage(imgSrc)}
-                      className={`relative w-20 h-24 flex-shrink-0 bg-[#0d0d0d] border transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] focus:outline-none overflow-hidden cursor-pointer ${
+                      aria-label={`Switch main display to ${activeProduct.name} perspective ${index + 1}`}
+                      className={`relative w-20 h-24 flex-shrink-0 bg-[#0d0d0d] border transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden cursor-pointer rounded-none focus:outline-none focus-visible:ring-1 focus-visible:ring-white/50 focus-visible:border-white/60 focus-visible:opacity-100 ${
                         isActive 
                           ? "border-white/60 scale-[1.02]" 
                           : "border-white/10 opacity-40 hover:opacity-80"
@@ -140,7 +248,7 @@ export default function ProductDetail() {
                     >
                       <img 
                         src={imgSrc} 
-                        alt={`Look detail view ${index + 1}`} 
+                        alt={`${activeProduct.name} - Display angle ${index + 1}`} 
                         className="w-full h-full object-cover object-center"
                         loading="lazy"
                         referrerPolicy="no-referrer"
@@ -224,7 +332,9 @@ export default function ProductDetail() {
                   </motion.div>
                 ) : (
                   <form onSubmit={handleInquirySubmit} className="flex flex-col gap-2 mt-2">
+                    <label htmlFor="concierge-email" className="sr-only">Atelier Access Email Inquiry</label>
                     <input 
+                      id="concierge-email"
                       type="email" 
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
@@ -234,7 +344,7 @@ export default function ProductDetail() {
                     />
                     <button 
                       type="submit"
-                      className="w-full py-4 bg-white text-black font-bold text-[10px] tracking-[0.25em] uppercase hover:bg-white/90 transition-colors cursor-pointer rounded-none flex items-center justify-center gap-2"
+                      className="w-full py-4 bg-white text-black font-bold text-[10px] tracking-[0.25em] uppercase hover:bg-white/90 transition-colors cursor-pointer rounded-none flex items-center justify-center gap-2 focus:outline-none focus-visible:ring-1 focus-visible:ring-white/50"
                     >
                       <span>Request Access Details</span>
                       <ArrowRight size={11} />
@@ -297,7 +407,7 @@ export default function ProductDetail() {
                 >
                   <img 
                     src={imgSrc} 
-                    alt={`Lookbook angle ${index + 1}`} 
+                    alt={`${activeProduct.name} - Campaign Perspective ${index + 1}`} 
                     className="w-full h-full object-cover object-center transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
                     loading="lazy"
                     referrerPolicy="no-referrer"
