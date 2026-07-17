@@ -25,14 +25,12 @@ export default function ProductDetail() {
     image: product?.primaryImage,
   });
 
-  const activeProduct = product || PRODUCTS[0];
-
   // Group all available images into a single gallery safely
   const galleryImages: string[] = product 
     ? [
-        activeProduct.primaryImage,
-        ...(activeProduct.secondaryImage ? [activeProduct.secondaryImage] : []),
-        ...(activeProduct.additionalImages || [])
+        product.primaryImage,
+        ...(product.secondaryImage ? [product.secondaryImage] : []),
+        ...(product.additionalImages || [])
       ]
     : [];
 
@@ -54,9 +52,6 @@ export default function ProductDetail() {
     if (!email) return;
     setIsSubmitted(true);
   };
-
-  // Find other looks for the "Related Pieces" section
-  const relatedProducts = PRODUCTS.filter((p) => p.id !== activeProduct.id);
 
   // Return custom Product Not Found layout if product doesn't exist
   if (!product) {
@@ -94,8 +89,8 @@ export default function ProductDetail() {
             <span className="text-[10px] tracking-[0.4em] text-white/40 uppercase font-mono mb-3 block">
               CAMPAIGN INDEX // LOOK NOT REGISTERED
             </span>
-            <h1 className="text-[32px] md:text-[48px] font-bold tracking-tight text-white font-display uppercase mb-4">
-              LOOK '{id}' NOT FOUND
+            <h1 className="text-[48px] md:text-[64px] font-bold tracking-tight text-white font-display uppercase mb-4 leading-none">
+              LOOK NOT FOUND
             </h1>
             <p className="text-[13px] leading-relaxed text-white/50 font-light italic mb-8">
               The requested sequence index is not registered in this campaign records. Below is the registered campaign index available for exploration.
@@ -105,7 +100,7 @@ export default function ProductDetail() {
               className="inline-flex items-center gap-3 border border-white/10 hover:border-white/40 bg-white/5 hover:bg-white/10 text-white font-bold text-[10px] tracking-[0.25em] uppercase px-6 py-4 transition-all duration-300 rounded-none focus:outline-none focus-visible:ring-1 focus-visible:ring-white/40"
             >
               <ArrowLeft size={11} />
-              <span>RETURN TO MAIN INDEX</span>
+              <span>Return to Collection</span>
             </Link>
           </div>
 
@@ -151,6 +146,10 @@ export default function ProductDetail() {
       </div>
     );
   }
+
+  // Beyond this point, we are guaranteed to have a valid product
+  const activeProduct = product;
+  const relatedProducts = PRODUCTS.filter((p) => p.id !== activeProduct.id);
 
   return (
     <div className="min-h-screen bg-[#080808] text-[#f4f4f4] font-sans relative select-none">
