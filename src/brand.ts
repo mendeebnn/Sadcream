@@ -6,7 +6,7 @@ export const BRAND_CONFIG = {
   timezone: "ULAANBAATAR",
   atelierHours: "ATELIER HOURS // BY APPOINTMENT",
   instagramUrl: import.meta.env.VITE_INSTAGRAM_URL || "https://www.instagram.com/sadcream_mongolia?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
-  contactEmail: import.meta.env.VITE_CONTACT_EMAIL || "atelier@sadcream.com",
+  contactPhone: import.meta.env.VITE_CONTACT_PHONE || "+976 9446 1766",
   siteUrl: import.meta.env.VITE_SITE_URL || window.location.origin,
   copyright: `© ${new Date().getFullYear()} SADCREAM. ALL RIGHTS RESERVED.`,
   seoDefaults: {

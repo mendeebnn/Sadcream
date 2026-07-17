@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { ArrowUp, Instagram, Mail } from "lucide-react";
+import { ArrowUp, Instagram, Phone } from "lucide-react";
 import { BRAND_CONFIG } from "../brand";
 
 export default function Footer() {
@@ -34,11 +34,11 @@ export default function Footer() {
           {/* Social Channels / Quick Links */}
           <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
             <a 
-              href={`mailto:${BRAND_CONFIG.contactEmail}`}
+              href={`tel:${BRAND_CONFIG.contactPhone.replace(/\s+/g, "")}`}
               className="text-[11px] tracking-[0.2em] uppercase text-white/50 hover:text-white transition-colors duration-300 flex items-center gap-1.5 focus:outline-none focus:ring-1 focus:ring-white/20 px-2 py-1"
             >
-              <Mail size={12} className="opacity-60" />
-              <span>Email</span>
+              <Phone size={12} className="opacity-60" />
+              <span>{BRAND_CONFIG.contactPhone}</span>
             </a>
             
             <a 

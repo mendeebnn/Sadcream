@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { ArrowUpRight, Copy, Check, Instagram, Mail } from "lucide-react";
+import { Instagram, Phone, Copy, Check } from "lucide-react";
 import { BRAND_CONFIG } from "../brand";
 
 export default function Contact() {
   const [copied, setCopied] = useState(false);
-  const emailAddress = BRAND_CONFIG.contactEmail;
+  const phoneNumber = BRAND_CONFIG.contactPhone;
 
-  const handleCopyEmail = async () => {
+  const handleCopyPhone = async () => {
     try {
-      await navigator.clipboard.writeText(emailAddress);
+      await navigator.clipboard.writeText(phoneNumber);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
@@ -62,7 +62,7 @@ export default function Contact() {
         {/* Right Side: Editorial Contact Channels (Columns 8-12) */}
         <div className="lg:col-span-5 flex flex-col justify-end gap-12">
           
-          {/* Email Channel Block */}
+          {/* Phone Channel Block */}
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -71,33 +71,33 @@ export default function Contact() {
             className="group flex flex-col gap-4 border-b border-white/10 pb-8"
           >
             <span className="text-[9px] tracking-[0.3em] text-white/30 uppercase font-mono font-medium block">
-              Digital Mail
+              Atelier Hotline
             </span>
             
             <div className="flex justify-between items-center gap-4">
               <a 
-                href={`mailto:${emailAddress}`}
+                href={`tel:${phoneNumber.replace(/\s+/g, "")}`}
                 className="text-[18px] sm:text-[22px] font-medium tracking-tight hover:tracking-[0.05em] text-white transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] font-sans"
               >
-                {emailAddress}
+                {phoneNumber}
               </a>
               
               <div className="flex items-center gap-2">
                 <button
-                  onClick={handleCopyEmail}
+                  onClick={handleCopyPhone}
                   className="p-3 border border-white/10 hover:border-white/40 text-white/40 hover:text-white transition-all duration-300 rounded-none cursor-pointer flex items-center justify-center"
-                  title="Copy email to clipboard"
-                  aria-label="Copy email address"
+                  title="Copy phone to clipboard"
+                  aria-label="Copy phone"
                 >
                   {copied ? <Check size={14} className="text-white" /> : <Copy size={14} />}
                 </button>
                 <a 
-                  href={`mailto:${emailAddress}`}
+                  href={`tel:${phoneNumber.replace(/\s+/g, "")}`}
                   className="p-3 border border-white/10 hover:border-white/40 text-white/40 hover:text-white transition-all duration-300 rounded-none flex items-center justify-center"
-                  title="Send Email"
-                  aria-label="Send Email"
+                  title="Call Atelier"
+                  aria-label="Call Atelier"
                 >
-                  <ArrowUpRight size={14} />
+                  <Phone size={14} />
                 </a>
               </div>
             </div>
