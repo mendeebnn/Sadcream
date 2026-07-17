@@ -16,10 +16,10 @@ export default function FeaturedCollection() {
         className="max-w-7xl mx-auto w-full mb-16 md:mb-28 text-left"
       >
         <span className="text-[10px] tracking-[0.4em] text-white/40 uppercase font-mono mb-3 block">
-          01 // LOOKBOOK OBJECTS
+          01 // CAMPAIGN INDEX
         </span>
         <h2 className="text-[42px] md:text-[64px] font-bold tracking-[-0.04em] font-display text-white leading-none">
-          FEATURED DROP
+          CAMPAIGN LOOKS
         </h2>
       </motion.div>
 
@@ -85,7 +85,7 @@ export default function FeaturedCollection() {
 
                 {/* View Specs Button (Minimalist, luxury styling) */}
                 <div className="mt-4 pt-4 border-t border-white/[0.04] flex justify-between items-center text-[10px] tracking-[0.3em] uppercase font-semibold text-white/40 group-hover:text-white transition-all duration-300">
-                  <span>EXAMINE SPECIFICATIONS</span>
+                  <span>VIEW LOOK DETAILS</span>
                   <ArrowRight size={12} className="transform -translate-x-1 group-hover:translate-x-0 transition-transform duration-300" />
                 </div>
               </div>

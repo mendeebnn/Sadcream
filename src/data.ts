@@ -8,51 +8,51 @@ import campaign4 from "./assets/images/sadcream_ribcage_back_1784087939886.jpg";
 
 export const PRODUCTS: Product[] = [
   {
-    id: "OBJECT-01",
+    id: "LOOK-01",
     name: "SADCREAM LEOPARD ZIP-UP HOODIE (BACK EMBROIDERY)",
     primaryImage: campaign4,
     secondaryImage: campaign3,
-    description: "Leopard-print zip-up hoodie featuring an anatomical graphic of a human heart and skeletal ribcage on the reverse.",
+    description: "Leopard-print zip-up hoodie featuring a white skeletal graphic of a ribcage on the back.",
     specs: [
-      "Leopard-print heavy fleece pattern",
-      "White skeletal anatomical embroidery on reverse",
-      "Relaxed drop-shoulder silhouette with slouchy hood",
-      "Brushed silver custom metal zipper",
-      "Rib-knit waist hem and wrist cuffs"
+      "All-over leopard print pattern",
+      "White outline ribcage graphic on the back",
+      "Front zip-up closure",
+      "Dropped shoulders and relaxed fit",
+      "Ribbed cuffs and hem"
     ],
     additionalImages: [campaign2, campaign1],
-    story: "Conceived as an anatomical study in texture, OBJECT-01 contrasts the wild chaos of a custom-developed leopard knit against the architectural precision of skeletal embroidery. Each piece is constructed from premium heavy-weight fleece, offering an ultra-relaxed drape. The reverse features a high-density white thread embroidery outlining the spinal columns and ribcage, creating a stark visual anchor that moves organically with the wearer."
+    story: "Presented in an evening setting, the garment features a contrasting white graphic positioned centrally across the back, standing out against the detailed leopard print."
   },
   {
-    id: "OBJECT-02",
+    id: "LOOK-02",
     name: "SADCREAM BLACK RHINESTONE ZIP-UP HOODIE",
     primaryImage: campaign1,
-    secondaryImage: campaign4, // Use campaign4 as secondary for black rhinestone to have a beautiful reverse preview!
-    description: "Black zip-up hoodie featuring hand-set silver rhinestone contours designed to catch ambient twilight.",
+    secondaryImage: campaign4,
+    description: "Black zip-up hoodie featuring thin reflective crystal lines following the main structural seams.",
     specs: [
-      "Deep-black double-faced knit fabric",
-      "Hand-placed silver rhinestone contour lines",
-      "Relaxed proportional sleeve design",
-      "Reinforced flat-lock seams",
-      "Polished metal hardware with subtle logo etching"
+      "Solid black fabric base",
+      "Linear reflective crystal details along the sleeve and shoulder seams",
+      "Front zip-up closure",
+      "Hooded collar",
+      "Relaxed sleeves"
     ],
     additionalImages: [campaign3, campaign2],
-    story: "Exploring light in absolute darkness, OBJECT-02 features delicate rhinestone placements following the structural seams of the garment. Under ambient or direct twilight, the custom-cut silver crystals reflect high-contrast beams, mimicking starlight against black velvet. Crafted from double-faced loopback knit, it balances a structural exterior with an incredibly soft touch against the skin."
+    story: "Captured at night, the linear crystal accents catch ambient direct light, creating high-contrast outlines along the shoulder and arm seams."
   },
   {
-    id: "OBJECT-03",
+    id: "LOOK-03",
     name: "SADCREAM LEOPARD ZIP-UP HOODIE (SLOUCHY SILHOUETTE)",
     primaryImage: campaign3,
     secondaryImage: campaign2,
-    description: "Oversized leopard-print zip-up hoodie designed with an extreme slouchy silhouette and drop-shoulder details.",
+    description: "Leopard-print zip-up hoodie styled with a loose, slouchy fit.",
     specs: [
-      "Oversized leopard-print wool-cotton blend pattern",
-      "Slouchy fit with relaxed body proportions",
-      "Integrated heavy double-lined hood",
-      "Exaggerated sleeve length for stacked styling",
-      "Concealed side-seam pockets"
+      "All-over leopard print pattern",
+      "Front zip-up closure with metallic zipper pull",
+      "Oversized silhouette with loose-fitting sleeves",
+      "Relaxed hood design",
+      "Elasticated cuffs and hem"
     ],
     additionalImages: [campaign1, campaign4],
-    story: "A masterclass in slouchy proportions, OBJECT-03 takes a relaxed, maximalist approach to casual knitwear. Utilizing an custom wool-cotton blend with an organic leopard motif, this hoodie falls into natural heavy folds. The sleeves are elongated to allow stacking around the wrists, while the bottom band is tailored to rest loosely at the hip, evoking an effortless, lived-in luxury look."
+    story: "The styling illustrates a relaxed drape and loose fit, showing the stacking of the leopard-patterned sleeves around the wrists."
   }
 ];

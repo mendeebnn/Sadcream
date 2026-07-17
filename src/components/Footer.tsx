@@ -82,7 +82,6 @@ export default function Footer() {
 
           <div className="flex flex-col md:items-end justify-end gap-1 font-mono">
             <span>© {currentYear} SADCREAM. ALL RIGHTS RESERVED.</span>
-            <span className="text-[8px] tracking-[0.2em] text-white/20 uppercase">SYSTEM STABILITY // NOMINAL</span>
           </div>
 
         </div>

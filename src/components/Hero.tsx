@@ -33,16 +33,7 @@ export default function Hero() {
     };
   }, []);
 
-  // Dynamically preload the next and previous campaign images in the background
-  useEffect(() => {
-    const nextIndex = (currentIndex + 1) % CAMPAIGN_IMAGES.length;
-    const prevIndex = (currentIndex - 1 + CAMPAIGN_IMAGES.length) % CAMPAIGN_IMAGES.length;
-    
-    [CAMPAIGN_IMAGES[nextIndex], CAMPAIGN_IMAGES[prevIndex]].forEach((src) => {
-      const img = new Image();
-      img.src = src;
-    });
-  }, [currentIndex]);
+
 
   const handleScrollToDrop = () => {
     document.getElementById("featured-collection")?.scrollIntoView({ behavior: "smooth" });
@@ -105,9 +96,7 @@ export default function Hero() {
         </div>
 
         <div className="hidden md:flex gap-12 items-center text-[10px] tracking-[0.2em] font-medium uppercase text-white/60 pointer-events-auto">
-          <button onClick={handleScrollToDrop} className="hover:text-[#f4f4f4] cursor-pointer transition-colors duration-300 bg-transparent border-none p-0 outline-none focus-visible:ring-1 focus-visible:ring-white/40 px-1 text-left">COLLECTIONS</button>
-          <button onClick={handleScrollToDrop} className="hover:text-[#f4f4f4] cursor-pointer transition-colors duration-300 bg-transparent border-none p-0 outline-none focus-visible:ring-1 focus-visible:ring-white/40 px-1 text-left">LOOKBOOK</button>
-          <button onClick={handleScrollToDrop} className="hover:text-[#f4f4f4] cursor-pointer transition-colors duration-300 bg-transparent border-none p-0 outline-none focus-visible:ring-1 focus-visible:ring-white/40 px-1 text-left">OBJECTS</button>
+          <button onClick={handleScrollToDrop} className="hover:text-[#f4f4f4] cursor-pointer transition-colors duration-300 bg-transparent border-none p-0 outline-none focus-visible:ring-1 focus-visible:ring-white/40 px-1 text-left">LOOKS</button>
           <button onClick={handleScrollToContact} className="hover:text-[#f4f4f4] cursor-pointer transition-colors duration-300 bg-transparent border-none p-0 outline-none focus-visible:ring-1 focus-visible:ring-white/40 px-1 text-left">CONTACT</button>
         </div>
 
@@ -132,7 +121,7 @@ export default function Hero() {
               <div className="flex items-center gap-6">
                 <div className="w-12 h-[1px] bg-white/30"></div>
                 <p className="text-[12px] tracking-[0.15em] font-light text-white/60 uppercase italic">
-                  OBJECT 01 // MONGOLIA
+                  LOOK 01 // MONGOLIA
                 </p>
               </div>
             </div>

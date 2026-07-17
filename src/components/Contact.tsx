@@ -158,8 +158,8 @@ export default function Contact() {
             transition={{ duration: 1.5, delay: 0.4 }}
             className="flex justify-between items-center text-[10px] tracking-wider text-white/50 font-mono"
           >
-            <span>RESPONSE WINDOW // 24H</span>
-            <span>GMT+8</span>
+            <span>ATELIER HOURS // BY APPOINTMENT</span>
+            <span>ULAANBAATAR</span>
           </motion.div>
 
         </div>
