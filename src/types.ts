@@ -15,6 +15,6 @@ export interface Product {
 
 export type ProductCategory = "Hoodies" | "Outerwear" | "Accessories";
 export interface CartItem { productId: string; size: string; quantity: number; }
-export interface Customer { name: string; email: string; phone: string; address: string; city: string; postalCode: string; }
-export type OrderStatus = "awaiting_payment" | "payment_submitted" | "approved" | "rejected" | "completed";
+export interface Customer { name: string; email?: string; phone: string; address: string; city: string; postalCode: string; notes: string; }
+export type OrderStatus = "pending_verification" | "payment_submitted" | "approved" | "rejected" | "completed";
 export interface Order { id: string; transactionCode: string; createdAt: string; customer: Customer; items: CartItem[]; subtotal: number; shipping: number; total: number; status: OrderStatus; }
